@@ -27,7 +27,10 @@ parameters:
   generate: expression
   from: "[a-zA-Z0-9]{8}"
   required: true
-
+- name: "SERVICE_URL"
+  displayName: "Service URL"
+  description: ""
+  value: ""
 objects:
 - kind: Service
   apiVersion: v1
@@ -52,6 +55,8 @@ objects:
     annotations:
       description: "Route for application's http service."
   spec:
+    host: "${SERVICE_URL}"
+    path: /jboss-helloworld/
     to:
       kind: Service
       name: "${APP_NAME}"
@@ -91,6 +96,9 @@ objects:
         - name: "${APP_NAME}"
           image: ' '
           imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "768Mi"
           livenessProbe:
             exec:
               command:
