@@ -98,7 +98,7 @@ objects:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "768Mi"
+              memory: "512Mi"
           livenessProbe:
             exec:
               command:
