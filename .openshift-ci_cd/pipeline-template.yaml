@@ -17,18 +17,18 @@ objects:
 - kind: BuildConfig
   apiVersion: v1
   metadata:
-    name: helloworld-pipeline
+    name: kitchensink-pipeline
     labels:
-      application: helloworld
+      application: kitchensink
     annotations:
-      pipeline.alpha.openshift.io/uses: '[{"name": "helloworld-dev", "namespace": "", "kind": "DeploymentConfig"},{"name": "helloworld-test", "namespace": "", "kind": "DeploymentConfig"},{"name": "helloworld-prod", "namespace": "", "kind": "DeploymentConfig"}]'
+      pipeline.alpha.openshift.io/uses: '[{"name": "kitchensink-dev", "namespace": "", "kind": "DeploymentConfig"},{"name": "kitchensink-test", "namespace": "", "kind": "DeploymentConfig"},{"name": "kitchensink-prod", "namespace": "", "kind": "DeploymentConfig"}]'
   spec:
     triggers:
       - type: ConfigChange
     strategy:
       type: JenkinsPipeline
       jenkinsPipelineStrategy:
-        jenkinsfilePath: helloworld/.openshift-ci_cd/Jenkinsfile
+        jenkinsfilePath: .openshift-ci_cd/Jenkinsfile
     source:
       type: git
       git:

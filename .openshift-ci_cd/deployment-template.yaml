@@ -37,7 +37,7 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
     annotations:
       description: "The web server's http port."
   spec:
@@ -51,12 +51,12 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
     annotations:
       description: "Route for application's http service."
   spec:
     host: "${SERVICE_URL}"
-    path: /jboss-helloworld/
+    path: /jboss-kitchensink-html5-mobile/
     to:
       kind: Service
       name: "${APP_NAME}"
@@ -65,7 +65,7 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
   spec:
     strategy:
       type: Recreate
@@ -88,7 +88,7 @@ objects:
       metadata:
         name: "${APP_NAME}"
         labels:
-          application: "${APP_NAME}"
+          app: "${APP_NAME}"
           deploymentConfig: "${APP_NAME}"
       spec:
         terminationGracePeriodSeconds: 60
@@ -98,7 +98,7 @@ objects:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "512Mi"
+              memory: "1Gi"
           livenessProbe:
             exec:
               command:
@@ -123,7 +123,7 @@ objects:
             protocol: TCP
           env:
           - name: OPENSHIFT_KUBE_PING_LABELS
-            value: "application=${APP_NAME}"
+            value: "app=${APP_NAME}"
           - name: OPENSHIFT_KUBE_PING_NAMESPACE
             valueFrom:
               fieldRef:
